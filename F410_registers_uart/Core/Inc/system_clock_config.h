@@ -7,6 +7,6 @@
  * @brief Configures the system clock
  *
  */
-void systemClockConfig ( void );
+void system_clock_config ( void );
 
 #endif /* SYSTEM_CLOCK_CONFIH_H */

@@ -9,7 +9,7 @@
 6. Enable the PLL and wait for it to become ready
 7. Select the Clock Source and wait for it to be set
 ********************************************************/
-void systemClockConfig(void)
+void system_clock_config(void)
 {
 
 	//! 1. ENABLE HSE and wait for the HSE to become Ready
