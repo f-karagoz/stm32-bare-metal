@@ -8,6 +8,7 @@ int main ( void )
 	uart2_config();
 
 	uint8_t rxBuffer[ BUFFER_SIZE ] = { 0 };
+	rxBuffer[ BUFFER_SIZE - 1 ] = '\0';									// Null termination
 	uint8_t testData[ 10 ] = {'H','E','L','L','O','!','\n','\0'};
 
 	uart2_send_data ( testData );
@@ -23,7 +24,7 @@ int main ( void )
 
 			rxBuffer[ i ] = gatheredChar;
 
-			if ( gatheredChar == '\r' || gatheredChar == '\n' )			// Received data is completed with CR or LF
+			if ( gatheredChar == '\n' )									// Received data is completed with LF
 			{
 				rxBuffer[ i + 1 ] = 0;									// Terminate the package
 
@@ -38,5 +39,35 @@ int main ( void )
 
 	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
