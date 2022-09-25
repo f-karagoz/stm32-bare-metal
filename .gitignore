@@ -1,0 +1,10 @@
+/.DS_Store
+/Debug/
+*.settings
+*.DS_Store
+*.cproject
+*.mxproject
+*.project
+*.launch
+*.ioc
+*.ld
