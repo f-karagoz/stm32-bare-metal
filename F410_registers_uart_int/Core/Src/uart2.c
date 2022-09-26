@@ -7,7 +7,8 @@
 4. Program the M bit in USART_CR1 to define the word length.
 5. Program the number of stop bits in USART_CR2.
 6. Select the desired baud rate using the baud rate register USART_BRR.
-7. Set the TE bit in USART_CR1 to send an idle frame as first transmission.
+7. Enable the interrupt(s).
+8. Set the TE bit in USART_CR1 to send an idle frame as first transmission.
 ********************************/
 
 void uart2_config (void)
@@ -40,7 +41,12 @@ void uart2_config (void)
 	// Calculated fraction is 0d2 := 0x2
 	USART2->BRR |= ( (0x1B << USART_BRR_DIV_Mantissa_Pos ) | ( 0x2 << USART_BRR_DIV_Fraction_Pos ) );
 
-	//! [5] 7. Set the TE bit in USART_CR1 to send an idle frame as first transmission.
+	//! 7. Enable the interrupt(s).
+	USART2->CR1 |= USART_CR1_RXNEIE;								// RXNE interrupt enabled.
+	// NVIC_SetPriority ( USART2_IRQn, 0 );
+	NVIC_EnableIRQ ( USART2_IRQn );									// Enable IRQ
+
+	//! [5] 8. Set the TE bit in USART_CR1 to send an idle frame as first transmission.
 	USART2->CR1 |= USART_CR1_TE | USART_CR1_RE;						// Enable Transmit and Receive
 
 }
