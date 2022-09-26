@@ -19,7 +19,7 @@ void uart2_config (void)
 
 	//! 2. Configure the UART PINs for Alternate Functions
 	GPIOA->MODER |= GPIO_MODER_MODER2_1 | GPIO_MODER_MODER3_1; 		// PA2 and PA3 pins set as Alternate Function
-	GPIOA->AFR[0] |= ( 7 << 8 ) | ( 7 << 12 ); 						// AF7 set for pin 2 and 3. Those pins' AFR is in the AFRH register therefore AFR[1].
+	GPIOA->AFR[0] |= ( 7 << 8 ) | ( 7 << 12 ); 						// AF7 set for pin 2 and 3. Those pins' AFR is in the AFRL register therefore AFR[0].
 	GPIOA->OSPEEDR |= GPIO_OSPEEDR_OSPEED2 | GPIO_OSPEEDR_OSPEED3; 	// Pins setup as high speed.
 
 
@@ -37,7 +37,8 @@ void uart2_config (void)
 	USART2->CR1 &= ~USART_CR1_OVER8;								// Set the over-sampling by 16 to be sure.
 	// For 115200 baud rate the BRR calculation via the RM0401 s.24.4.4 formula.
 	// USART2 is connected to APB1 and we previously set 50MHz to that bus line.
-	// Calculated mantissa id 0d27 := 0x1B
+	// Calculated USARTDIV is 27.1267
+	// Calculated mantissa is 0d27 := 0x1B
 	// Calculated fraction is 0d2 := 0x2
 	USART2->BRR |= ( (0x1B << USART_BRR_DIV_Mantissa_Pos ) | ( 0x2 << USART_BRR_DIV_Fraction_Pos ) );
 
