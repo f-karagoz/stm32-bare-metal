@@ -29,7 +29,7 @@ void system_clock_config(void)
 
 	//! 4. Configure the PRESCALARS HCLK, PCLK1, PCLK2
 	RCC->CFGR |= RCC_CFGR_HPRE_DIV1; 			// AHB PS Div 1
-	RCC->CFGR |= RCC_CFGR_PPRE1_DIV2; 			// APB1 PS Div 1
+	RCC->CFGR |= RCC_CFGR_PPRE1_DIV2; 			// APB1 PS Div 2
 	RCC->CFGR |= RCC_CFGR_PPRE2_DIV1; 			// APB2 PS Div 1
 
 	//! 5. Configure the MAIN PLL
@@ -40,6 +40,7 @@ void system_clock_config(void)
 	RCC->PLLCFGR |= 100 << RCC_PLLCFGR_PLLN_Pos;
 	RCC->PLLCFGR |= 0 << RCC_PLLCFGR_PLLP_Pos;	// Actually it does nothing
 	RCC->PLLCFGR |= RCC_PLLCFGR_PLLSRC_HSE; 	// High speed external clock selected as clock source
+	// TODO change the PLL clock source to HSI and change PLLM to 2 to get 100Mhz system clock
 
 	//! 6. Enable the PLL and wait for it to become ready
 	RCC->CR |= RCC_CR_PLLON;
