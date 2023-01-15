@@ -14,8 +14,8 @@ void system_clock_config(void)
 
 	//! 1. ENABLE HSE and wait for the HSE to become Ready
 	// RCC->CR |= (1<<16);
-	RCC->CR |= RCC_CR_HSEON;  					// Set RCC's CR register's 16th bit to 1
-	while (!(RCC->CR & RCC_CR_HSERDY));
+	RCC->CR |= RCC_CR_HSION;  					// Set RCC's CR register's 16th bit to 1
+	while (!(RCC->CR & RCC_CR_HSIRDY));
 
 	//! 2. Set the POWER ENABLE CLOCK and VOLTAGE REGULATOR
 	RCC->APB1ENR |= RCC_APB1ENR_PWREN;
@@ -36,11 +36,10 @@ void system_clock_config(void)
 	// PLLM=4	PLLN=100	PLLP=2(!)	PLLQ=3(did not use)		PLLR=2(did not use)
 	RCC->PLLCFGR = 0x00000000; 					// Reset the register. Default values prevent us from setting correct values.
 	// RCC->PLLCFGR |= (4<<0) | (100<<6) | (0<<16);	// PLLM 0:5		PLLN 6:14	PLLP 16:17
-	RCC->PLLCFGR |= 4 << RCC_PLLCFGR_PLLM_Pos;
+	RCC->PLLCFGR |= 8 << RCC_PLLCFGR_PLLM_Pos;
 	RCC->PLLCFGR |= 100 << RCC_PLLCFGR_PLLN_Pos;
 	RCC->PLLCFGR |= 0 << RCC_PLLCFGR_PLLP_Pos;	// Actually it does nothing
-	RCC->PLLCFGR |= RCC_PLLCFGR_PLLSRC_HSE; 	// High speed external clock selected as clock source
-	// TODO change the PLL clock source to HSI and change PLLM to 2 to get 100Mhz system clock
+	RCC->PLLCFGR |= RCC_PLLCFGR_PLLSRC_HSI; 	// High speed external clock selected as clock source
 
 	//! 6. Enable the PLL and wait for it to become ready
 	RCC->CR |= RCC_CR_PLLON;
