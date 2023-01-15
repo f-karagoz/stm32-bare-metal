@@ -60,13 +60,6 @@ void tim6_config ( uint16_t psc, uint16_t arr )
 	//! 1. Enable the timer clock source
 	RCC->APB1ENR |= RCC_APB1ENR_TIM6EN;
 
-	//! 5. Enable auto reload buffering
-	// The content of the preload register is transfered to the shadow register at each update event
-	TIM6->CR1 |= TIM_CR1_ARPE;
-
-	//! 7. Transfer the content of the preload registers to buffers
-	TIM6->EGR |= TIM_EGR_UG;
-
 	//! 2. Set the prescaler
 	TIM6->PSC = psc - 1;
 
@@ -76,8 +69,15 @@ void tim6_config ( uint16_t psc, uint16_t arr )
 	//! 4. Set the counter mode
 	// TIM6 only offers up-counter
 
+	//! 5. Enable auto reload buffering
+	// The content of the preload register is transfered to the shadow register at each update event
+	TIM6->CR1 |= TIM_CR1_ARPE;
+
 	//! 6. Only counter overflow generate an interrupt
 	TIM6->CR1 |= TIM_CR1_URS;
+
+	//! 7. Transfer the content of the preload registers to buffers
+	TIM6->EGR |= TIM_EGR_UG;
 
 	//! 8. Enable the update interrupt
 	TIM6->DIER |= TIM_DIER_UIE;
