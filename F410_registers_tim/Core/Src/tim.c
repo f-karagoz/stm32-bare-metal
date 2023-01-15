@@ -1,47 +1,12 @@
-#include "tim.h"
-
 /*
- * Features of TIM6:
- * 16-bit auto-reload upcounter
- * 16-bit programmable prescaler (canbe set on the fly)
- * Interrupt / DMA generation
- *
- * Counter Register (TIMx_CNT)
- * Prescaler Register (TIMx_PSC)
- * Auto-Reload Register (TIMx_ARR)
- *
- * The counter is clocked by the prescaler output CK_CNT, which is enabled only when the
- * counter enable bit (CEN) in the TIMx_CR1 register is set.
- *
- * Note that the actual enable signal CNR_EN is set 1 clock cycle after CEN.
- *
- * The prescaler can divide the counter clock by any factor between 1 and 65646.
- * When prescaler is changed on-the-fly, the new prescaler is buffered on the next update event.
- *
- * The counter counts from 0 to the auto-reload value, then restarts from 0 and generates an counter
- * overflow event.
- *
- * An update event can be generated at each counter overflow or by setting the UG bit in
- * the TIMx_EGR register.
- *
- * The UEV event can be disabled by software by setting the UDIS bit in the TIMx_CR1 register.
- * This avoids updating the shadow registers while writing new values into the preload registers.
- * In this way no update event occurs until the UDIS bit has been written to 0, however, the counter
- * and the prescaler counter both restart from 0 (but the prescaler rate does not change).
- *
- * When an update event occurs, all registers are updated and the update flag (UIF bit in the
- * TIMx_SR register) is set (depending on the URS bit):
- *  - The buffer of the prescaler is reloaded with the preload value (contents of the TIMx_PSC register)
- *  - The auto-reload shadow register is updated with the preload value (TIMx_ARR)
- *
- * The counter clock is provided by the Internal clock (CLK_INT) source.
- *
- * When the microcontroller enters the debug mode (Cortex-M4 with FPU core - halted),
- * the TIMx counter either continues to work normally or stops, depending on the
- * DBG_TIMx_STOP configuration bit in the DBGMCU module.
- *
- */
+* Copyright (c) 2022, 2023 by
+* Furkan Karagoz, Istanbul/Turkey. All rights reserved.
+*
+* Permission to use, copy, modify, and distribute this software
+* is freely granted, provided that this notice is preserved.
+*/
 
+#include "tim.h"
 
 /**************************** >>> STEPS FOLLOWED <<< **********************************
  *  1. Enable the timer clock source

@@ -1,3 +1,11 @@
+/*
+* Copyright (c) 2022, 2023 by
+* Furkan Karagoz, Istanbul/Turkey. All rights reserved.
+*
+* Permission to use, copy, modify, and distribute this software
+* is freely granted, provided that this notice is preserved.
+*/
+
 #include "main.h"
 
 uint8_t ledState = 0;
