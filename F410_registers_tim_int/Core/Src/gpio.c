@@ -1,5 +1,5 @@
 /*
-* Copyright (c) 2022, 2023 by
+* Copyright (c) 2023 by
 * Furkan Karagoz, Istanbul/Turkey. All rights reserved.
 *
 * Permission to use, copy, modify, and distribute this software
