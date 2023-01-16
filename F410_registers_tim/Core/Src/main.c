@@ -1,5 +1,5 @@
 /*
-* Copyright (c) 2022, 2023 by
+* Copyright (c) 2023 by
 * Furkan Karagoz, Istanbul/Turkey. All rights reserved.
 *
 * Permission to use, copy, modify, and distribute this software
@@ -21,27 +21,24 @@ int main ( void )
 	tim6_enable ( 1 );
 
 	while (1)
-		;
+	{
+		if ( TIM6->CNT == TIM6->ARR)
+		{
+			if (ledState)
+			{
+				led_off();
+				ledState = 0;
+			}
+			else
+			{
+				led_on();
+				ledState = 1;
+			}
+
+			TIM6->CNT = 0;
+		}
+
+	}
 
 	return 0;
-}
-
-
-void TIM6_DAC_IRQHandler ( void )
-{
-	if ( TIM6->SR & TIM_SR_UIF )
-	{
-		TIM6->SR &= ~TIM_SR_UIF;
-
-		if (ledState)
-		{
-			led_off();
-			ledState = 0;
-		}
-		else
-		{
-			led_on();
-			ledState = 1;
-		}
-	}
 }
