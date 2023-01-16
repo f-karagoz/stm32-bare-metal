@@ -14,11 +14,9 @@
  *  3. Set the auto reload
  *  4. Set the counter mode
  *  5. Enable auto reload preload
- *  6. ! Set CR1.URS to make only counter overflow generate an interrupt
- *  7. ! Set the EGR.UG to generate an update to transfer the content of the preload registers to buffers
- *  // Now an event occurred but UIF bit is not changed due to state of the URS bit (also interrupts are not enabled)
- *  8. Enable the update interrupt DIER.UIE
- *  9. SET THE NVIC to get callback from interrupt events
+ *  6. Set CR1.URS to make only counter overflow generate an interrupt
+ *  7. Set the CR1.URS bit to enable one pulse mode
+ *  8. Set the EGR.UG to generate an update to transfer the content of the preload registers to buffers
  **************************************************************************************/
 void tim6_config ( uint16_t psc, uint16_t arr )
 {
@@ -41,24 +39,11 @@ void tim6_config ( uint16_t psc, uint16_t arr )
 	//! 6. Only counter overflow generate an interrupt
 	TIM6->CR1 |= TIM_CR1_URS;
 
-	//! 7. Transfer the content of the preload registers to buffers
+	//! 7. One pulse mode causes timer to stop counting in the next update event
+	TIM6->CR1 |= TIM_CR1_OPM;
+
+	//! 8. Transfer the content of the preload registers to buffers
 	TIM6->EGR |= TIM_EGR_UG;
-
-	//! 8. Enable the update interrupt
-	TIM6->DIER |= TIM_DIER_UIE;
-	TIM6->SR &= ~TIM_SR_UIF;			// Interrupt should not be triggered by now, but we clear it anyways
-
-	//! 9. Configure the NVIC to run a callback function when interrupt occur
-	/* Set interrupt priority */
-	IRQn_Type IRQn = TIM6_DAC_IRQn;
-	uint32_t prioritygroup = 0x00U;
-	uint32_t PreemptPriority = 0;
-	uint32_t SubPriority = 0;
-	prioritygroup = NVIC_GetPriorityGrouping();
-	NVIC_SetPriority(IRQn, NVIC_EncodePriority(prioritygroup, PreemptPriority, SubPriority));
-
-	/* Enable interrupt */
-	NVIC_EnableIRQ(IRQn);
 
 	//! Optional: Stops the timer when debug is halted
 	DBGMCU->APB1FZ |= DBGMCU_APB1_FZ_DBG_TIM6_STOP;
