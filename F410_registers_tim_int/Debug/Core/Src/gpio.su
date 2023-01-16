@@ -1,0 +1,3 @@
+gpio.c:11:6:gpio_config	4	static
+gpio.c:35:6:led_on	4	static
+gpio.c:40:6:led_off	4	static
