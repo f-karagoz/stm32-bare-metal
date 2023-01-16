@@ -60,8 +60,8 @@ all: main-build
 main-build: F410_registers_tim_int.elf secondary-outputs
 
 # Tool invocations
-F410_registers_tim_int.elf: $(OBJS) $(USER_OBJS) /Users/fkaragoz/STM32CubeIDE/myworkspace/F410_registers_tim_int/STM32F410RBTX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-gcc -o "F410_registers_tim_int.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"/Users/fkaragoz/STM32CubeIDE/myworkspace/F410_registers_tim_int/STM32F410RBTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="F410_registers_tim_int.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+F410_registers_tim_int.elf: $(OBJS) $(USER_OBJS) /Users/fkaragoz/git/STM32_Register_Level/F410_registers_tim_int/STM32F410RBTX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-gcc -o "F410_registers_tim_int.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"/Users/fkaragoz/git/STM32_Register_Level/F410_registers_tim_int/STM32F410RBTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="F410_registers_tim_int.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 
