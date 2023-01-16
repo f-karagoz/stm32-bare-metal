@@ -1,5 +1,5 @@
 /*
-* Copyright (c) 2022, 2023 by
+* Copyright (c) 2023 by
 * Furkan Karagoz, Istanbul/Turkey. All rights reserved.
 *
 * Permission to use, copy, modify, and distribute this software
@@ -9,7 +9,7 @@
 #include "system_clock_config.h"
 
 /*************>>>>>>> STEPS FOLLOWED <<<<<<<<************
-1. ENABLE HSE and wait for the HSE to become Ready
+1. ENABLE HSI and wait for the HSI to become Ready
 2. Set the POWER ENABLE CLOCK and VOLTAGE REGULATOR
 3. Configure the FLASH PREFETCH and the LATENCY Related Settings
 4. Configure the PRESCALARS HCLK, PCLK1, PCLK2
