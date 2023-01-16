@@ -1,8 +1,0 @@
-"./Core/Src/gpio.o"
-"./Core/Src/main.o"
-"./Core/Src/syscalls.o"
-"./Core/Src/sysmem.o"
-"./Core/Src/system_clock_config.o"
-"./Core/Src/system_stm32f4xx.o"
-"./Core/Src/tim.o"
-"./Core/Startup/startup_stm32f410rbtx.o"
