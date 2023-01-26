@@ -20,8 +20,8 @@
 void system_clock_config(void)
 {
 
-	//! 1. ENABLE HSE and wait for the HSE to become Ready
-	// RCC->CR |= (1<<16);
+	//! 1. ENABLE HSI and wait for the HSI to become Ready
+	// RCC->CR |= (1<<0);
 	RCC->CR |= RCC_CR_HSION;  					// Set RCC's CR register's 16th bit to 1
 	while (!(RCC->CR & RCC_CR_HSIRDY));
 
@@ -41,13 +41,13 @@ void system_clock_config(void)
 	RCC->CFGR |= RCC_CFGR_PPRE2_DIV1; 			// APB2 PS Div 1
 
 	//! 5. Configure the MAIN PLL
-	// PLLM=4	PLLN=100	PLLP=2(!)	PLLQ=3(did not use)		PLLR=2(did not use)
+	// PLLM=8	PLLN=100	PLLP=2(!)	PLLQ=3(did not use)		PLLR=2(did not use)
 	RCC->PLLCFGR = 0x00000000; 					// Reset the register. Default values prevent us from setting correct values.
-	// RCC->PLLCFGR |= (4<<0) | (100<<6) | (0<<16);	// PLLM 0:5		PLLN 6:14	PLLP 16:17
 	RCC->PLLCFGR |= 8 << RCC_PLLCFGR_PLLM_Pos;
 	RCC->PLLCFGR |= 100 << RCC_PLLCFGR_PLLN_Pos;
 	RCC->PLLCFGR |= 0 << RCC_PLLCFGR_PLLP_Pos;	// Actually it does nothing
-	RCC->PLLCFGR |= RCC_PLLCFGR_PLLSRC_HSI; 	// High speed external clock selected as clock source
+	RCC->PLLCFGR |= RCC_PLLCFGR_PLLSRC_HSI; 	// High speed internal clock selected as clock source
+	// This setting will multiply the 16 MHz oscillator frequency source to 100 MHz
 
 	//! 6. Enable the PLL and wait for it to become ready
 	RCC->CR |= RCC_CR_PLLON;
