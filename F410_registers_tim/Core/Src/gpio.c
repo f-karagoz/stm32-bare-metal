@@ -8,15 +8,14 @@
 
 #include "gpio.h"
 
+/************ STEPS FOLLOWED ***********
+1. Enable the GPIO CLOCK
+2. Set the Pin as OUTPUT
+3. Configure the OUTPUT MODE
+Note: LED connected to PA5
+***************************************/
 void gpio_config (void)
 {
-	/************ STEPS FOLLOWED ***********
-	1. Enable the GPIO CLOCK
-	2. Set the Pin as OUTPUT
-	3. Configure the OUTPUT MODE
-	Note: LED connected to PA5
-	***************************************/
-
 	//! 1. Enable the GPIO CLOCK
 	RCC->AHB1ENR |= RCC_AHB1ENR_GPIOAEN;		// Enable GPIO A Clock
 
