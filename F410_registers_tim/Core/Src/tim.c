@@ -27,7 +27,7 @@ void tim6_config ( uint16_t psc, uint16_t arr )
 	TIM6->PSC = psc - 1;
 
 	//! 3. Set the auto reload
-	TIM6->ARR = arr;
+	TIM6->ARR = arr - 1;
 
 	//! 4. Set the counter mode
 	// TIM6 only offers up-counter
