@@ -19,6 +19,10 @@
 ********************************************************/
 void system_clock_config(void)
 {
+	//!0 Configure HSI trim value
+	// Preset value if 16, we set it 10 to compensate for the observed 1.9% fast clock speed
+	RCC->CR &= ~RCC_CR_HSITRIM_Msk;
+	RCC->CR |= ( 10 << RCC_CR_HSITRIM_Pos );
 
 	//! 1. ENABLE HSE and wait for the HSE to become Ready
 	// RCC->CR |= (1<<16);
