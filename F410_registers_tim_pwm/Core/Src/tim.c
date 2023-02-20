@@ -96,7 +96,7 @@ void tim11_config ( uint16_t psc, uint16_t arr )
 	//! 2. Set mode of the GPIO pin, and set the alternate function
 	GPIOC->MODER |= ( 0x2UL << GPIO_MODER_MODER12_Pos );		// PC12 Alternate function
 	GPIOC->OSPEEDR |= ( 0x2UL << GPIO_OSPEEDR_OSPEED12_Pos );	// PC12 High speed
-	GPIOC->AFR[2] |= ( 0x3UL << 16);							// AF3 for TIM11
+	GPIOC->AFR[1] |= ( 0x3UL << 16);							// AF3 for TIM11
 
 	//! 3. Set the counter mode
 	// TIM11 only offers up-counter
@@ -127,7 +127,7 @@ void tim11_config ( uint16_t psc, uint16_t arr )
 	TIM11->SR &= ~( TIM_SR_CC1IF | TIM_SR_UIF );				// Clear the interrupts
 
 	//! 11. Set the NVIC to handle interrupts
-	IRQn_Type IRQn = TIM6_DAC_IRQn;
+	IRQn_Type IRQn = TIM1_TRG_COM_TIM11_IRQn;
 	uint32_t priorityGroup = NVIC_GetPriorityGrouping();
 	uint32_t preemptPriority = 0;
 	uint32_t subPriority = 0;
