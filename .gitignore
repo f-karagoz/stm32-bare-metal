@@ -1,5 +1,4 @@
-/.DS_Store
-/Debug/
+*/Debug
 *.settings
 *.DS_Store
 *.cproject
