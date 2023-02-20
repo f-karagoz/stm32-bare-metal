@@ -104,7 +104,7 @@ void tim11_config ( uint16_t psc, uint16_t arr )
 	//! 4. Set the timing parameters
 	TIM11->PSC = psc - 1;										// Set prescaler
 	TIM11->ARR = arr;											// Set auto-reload
-	TIM11->CCR1 = arr / 3;										// 50% duty cycle
+	TIM11->CCR1 = arr / 2;										// 50% duty cycle
 
 	//! 5. Set PWM mode and enable output compare preload register
 	TIM11->CCMR1 |= ( 0x6UL << TIM_CCMR1_OC1M_Pos );			// PWM mode 1
