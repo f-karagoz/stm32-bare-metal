@@ -114,8 +114,8 @@ void tim11_config ( uint16_t psc, uint16_t arr )
 	TIM11->CR1 |= TIM_CR1_ARPE;									// Enable preload of ARR
 
 	//! 7. Configure signal polarity, and enable the CC output
-	TIM11->CCER &= ~TIM_CCER_CC1P;			// Set signal polarity
-	TIM11->CCER |= TIM_CCER_CC1E;			// Enable CC
+	TIM11->CCER &= ~TIM_CCER_CC1P;								// Set signal polarity
+	TIM11->CCER |= TIM_CCER_CC1E;								// Enable CC
 
 	//! 8. Set interrupt source
 	TIM11->CR1 |= TIM_CR1_URS;									// Setting UG bit does not gen. int.
